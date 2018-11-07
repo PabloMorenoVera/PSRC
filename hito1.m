@@ -52,17 +52,21 @@ h = genera_canal(N,SNR_av, M);
 I=5000;
 %Numero maximo de prestaciones
 P_max = 0.5;
-l_opt = calcula_lopt(I,P_max, N);
+[l_opt, l] = calcula_lopt(I,P_max, N, h);
 
 %Medida de prestaciones para el offline
 p = zeros(N,1);
 for n=1:N
     p(n) = f_waterfilling( h(n), l_opt);
+    c(n) = log(1 + h(n)*p(n));
 end
+
 disp('Pot media offline')
 mean(p)
-
-
+disp('Tasa media offline')
+mean(c)
+figure()
+plot(l)
 
 
 %%
