@@ -9,7 +9,7 @@ SNR_av = 6; %SNR en unidades naturales
 M = 1;   %Numero de usuarios
 h = genera_canal(N,SNR_av, M);
 
-%Calculamos el multiplicador 髉timo (offline)
+%Calculamos el multiplicador 贸ptimo (offline)
 I=5000; %Numero maximo de prestaciones
 P_max = 0.5;
 
@@ -48,7 +48,7 @@ SNR_av = 6; %SNR en unidades naturales
 M = 1;   %Numero de usuarios
 h = genera_canal(N,SNR_av, M);
 
-%Calculamos el multiplicador 髉timo (offline)
+%Calculamos el multiplicador 贸ptimo (offline)
 I=5000;
 %Numero maximo de prestaciones
 P_max = 0.5;
@@ -65,6 +65,8 @@ disp('Pot media offline')
 mean(p)
 disp('Tasa media offline')
 mean(c)
+disp('Valor de lamda')
+l(I)
 figure()
 plot(l)
 
@@ -75,15 +77,15 @@ p = zeros(N,1);
 c = zeros(N,1);
 l = zeros(N,1);
 l(1) = 1/P_max; 
-%Esto simplemente es una inicializaci髇
+%Esto simplemente es una inicializaci贸n
 for n=1:N
     p(n) = f_waterfilling( h(n), l(n));
     c(n) = log(1 + h(n)*p(n));
     if n<N
-        %Si no estamos en el 鷏timo instante, actualizamos la estimaci髇
-        %del multiplicador para el pr髕imo instante
+        %Si no estamos en el 煤ltimo instante, actualizamos la estimaci贸n
+        %del multiplicador para el pr贸ximo instante
         l(n+1) = actualiza_est_mult(l(n),h(n));
-        %Esta funci髇 hay que codificarla (es muy sencilla)
+        %Esta funci贸n hay que codificarla (es muy sencilla)
     end
 end
 disp('Pot media online')
