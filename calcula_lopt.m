@@ -10,9 +10,9 @@ for i=1:(I - 1)
     for n=1:N
         p(n) = f_waterfilling(h(n), l(i));
     end
-    pot_media(i) = mean(p);
+    pot_media = mean(p);
     %2. Una vez que se tiene, el multiplicador se actualiza
-    l(i+1)=l(i)+ paso*(pot_media(i) - P_max);
+    l(i+1)=l(i)+ paso*(pot_media - P_max);
     %3. Nos aseguramos de que el multiplicador no es negativo (y tampoco le dejamos que llegue a cero)
     l(i+1)=max(l(i+1),0+.01*rand(1,1));
 end
