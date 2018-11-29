@@ -1,0 +1,40 @@
+%% Práctica II. PSRC
+clc;
+clear all;
+
+Ts = 1/10e6;
+Doppler = 40;
+N = 1e4;
+
+%% Diseño SISO.
+h_siso = rayleighchan(Ts, Doppler)
+h_siso.StorePathGains = 1;
+
+a = ones(1,N);
+h_siso = filter(h_siso,a);
+
+histogram(abs(h_siso).^2,'Normalization','pdf')
+
+
+%% MISO 4x1
+%Diseñar un canal rayleigh.
+h_miso = zeros(4,N);
+a = ones(1,N);
+
+for i = 1:4
+    h = rayleighchan(Ts, Doppler)
+    h.StorePathGains = 1;
+    h = filter(h,a);
+    h_miso(i,:) = h;
+end
+
+h_eqs = h_miso.*conj(h_miso)
+h_eq
+
+%hist(abs(G))
+
+%% SIMO 1x4
+
+%% MIMO 4x4
+
+%% MIMO 4x4 (1/4 de potencia)
